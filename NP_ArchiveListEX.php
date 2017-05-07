@@ -1,4 +1,4 @@
-<?
+<?php
 
 class NP_ArchiveListEX extends NucleusPlugin {
 
@@ -174,4 +174,3 @@ function getData(id){
 //		} 
 	}
 }
-?>
