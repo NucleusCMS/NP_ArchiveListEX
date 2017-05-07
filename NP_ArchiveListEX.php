@@ -23,14 +23,7 @@ class NP_ArchiveListEX extends NucleusPlugin {
 		return '1.01'; 
 	}
 	
-	function supportsFeature($what) { 
-		switch($what){ 
-			case 'SqlTablePrefix': 
-				return 1; 
-			default: 
-				return 0; 
-		} 
-	}
+	function supportsFeature($what) {return in_array($what,array('SqlTablePrefix','SqlApi'));}
 
 	// a description to be shown on the installed plugins listing
 	function getDescription() { 
@@ -141,7 +134,7 @@ function getData(id){
 		$res = sql_query($query);
 
 		$oldYear = 0;
-		while ($current = mysql_fetch_object($res)) {
+		while ($current = sql_fetch_object($res)) {
 			$current->itime = strtotime($current->itime);	// string time -> unix timestamp
 			if ($mode == 'day') {
 				$archivedate = date('Y-m-d',$current->itime);
@@ -171,7 +164,7 @@ function getData(id){
 			$oldYear = $data['year'];
 
 		}
-		mysql_free_result($res);
+		sql_free_result($res);
 		echo $lastFooter;
 
 //		break;
